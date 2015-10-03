@@ -15,26 +15,30 @@ Package.onUse(function(api) {
 
   api.use(['spacedrop:core@0.0.1']);
 
-  var packages = [
+  const shared = [
     'meteorhacks:fast-render@2.10.0',
     'meteorhacks:subs-manager',
     'kadira:flow-router-ssr@3.3.0',
     'kadira:react-layout@1.3.1',
 
-    'reactive-dict'
+    'reactive-dict',
+    'timbrandin:react-templates'
   ];
+  api.use(shared);
+  api.imply(shared);
 
-  api.use(packages);
+  // Templates.
+  api.addFiles('templates/page.html.jsx');
 
-  api.imply(packages);
+  // Components
+  api.addFiles('components/page.jsx');
 
-  api.addFiles('body.jsx');
-  api.addFiles('menu.jsx');
+  // Routing logic and subscription management.
+  api.addFiles('subscription-cache.js');
+  api.addFiles('menu.js');
 
   // Help keep track of page scroll during history navigation.
   api.addFiles('scroll-tracking.js', 'client');
-
-  api.export('Menu');
 });
 
 Package.onTest(function(api) {

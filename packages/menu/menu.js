@@ -1,4 +1,4 @@
-Menu = class Menu {
+SD.Menu = class Menu {
   static current() {
     return FlowRouter.current();
   }
@@ -7,7 +7,7 @@ Menu = class Menu {
       subscriptions: function() {
         _.each(route.subscriptions, (options, subscription) => {
           if (typeof subscription == 'string') {
-            this.register(subscription, Meteor.subscribe.apply(this, _.union([subscription], _.map(options, (option) => {
+            this.register(subscription, SD.Utils.SubsManager.subscribe.apply(SD.Utils.SubManager, _.union([subscription], _.map(options, (option) => {
               if (typeof option == 'function') {
                 return option();
               }
@@ -31,20 +31,20 @@ Menu = class Menu {
           if (route.subscriptions && route.subscriptions.length > 0) {
             route.subscriptions.map((subscription) => {
               FlowRouter.subsReady(subscription, () => {
-                ReactLayout.render(Body, {
+                ReactLayout.render(SD.Views.Client.Page, {
                   content: React.createElement(route.page_component, arguments)
                 });
               });
             });
           }
           else {
-            ReactLayout.render(Body, {
+            ReactLayout.render(SD.Views.Client.Page, {
               content: React.createElement(route.page_component, arguments)
             });
           }
         }
         else {
-          ReactLayout.render(Body, {
+          ReactLayout.render(SD.Views.Client.Page, {
             content: React.createElement(route.page_component, arguments)
           });
         }

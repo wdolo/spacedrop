@@ -1,4 +1,4 @@
-User.User = class User extends SpaceDrop.Component {
+SD.Views.User = class extends SD.Component {
   constructor(props) {
     super(props);
     var user;

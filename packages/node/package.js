@@ -13,9 +13,14 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2');
 
-  api.use(['spacedrop:core@0.0.1']);
+  api.use([
+    'spacedrop:core@0.0.1',
+    'spacedrop:entity@0.0.1',
+    'spacedrop:permission@0.0.1'
+  ]);
 
   api.addFiles('node.js');
+  api.addFiles('permissions.js');
 });
 
 Package.onTest(function(api) {

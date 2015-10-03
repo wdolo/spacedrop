@@ -13,8 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2');
 
-  // Base Packages.
-  var packages = [
+  const shared = [
     'meteor-base',
     'mongo',
     'jquery',
@@ -24,16 +23,18 @@ Package.onUse(function(api) {
     'ecmascript',
     'react'
   ];
+  api.use(shared);
+  api.imply(shared);
 
-  api.use(packages);
+  api.addFiles('namespaces.js');
+  api.addFiles('component.js');
 
-  api.imply(packages);
+  // Exported symbols outside the scope of this package
+  api.export(['SD']);
 
-  api.addFiles('core.js');
+  // Added Blaze support in React.
   api.addFiles('blaze-in-react.js');
-
   api.export('BlazeInReact');
-  api.export('SpaceDrop');
 });
 
 Package.onTest(function(api) {
